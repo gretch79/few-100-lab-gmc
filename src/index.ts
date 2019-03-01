@@ -15,6 +15,9 @@ billAmount.addEventListener('keyup', () => {
         billAmount.className = "error";
         billAmount.value = "";
         errorMessage.innerText = "Bill amount entered is not a valid amount!";
+        outAmountOfTip.innerText = `Amount of tip: $`;
+        outTotalToBePaid.innerText = `Total to be Paid: $`;
+        outBillAmount.innerText = `Bill Amount: $`;
         return;
     }
     else {
@@ -29,33 +32,40 @@ billAmount.addEventListener('keyup', () => {
 });
 
 tenButton.addEventListener('click', () => {
-    outTipPercent.innerText = "Tip Percentage: 10%";
-    tipAmountReminder.innerText = "You are tipping 10%";
-    tenButton.disabled = true;
-    fifteenButton.disabled = false;
-    twentyButton.disabled = false;
+    tipThings("10%");
     finalAmounts();
 
 });
 
 fifteenButton.addEventListener('click', () => {
-    outTipPercent.innerText = "Tip Percentage: 15%";
-    tipAmountReminder.innerText = "You are tipping 15%";
-    tenButton.disabled = false;
-    fifteenButton.disabled = true;
-    twentyButton.disabled = false;
+    tipThings("15%");
     finalAmounts();
 
 });
 
 twentyButton.addEventListener('click', () => {
-    outTipPercent.innerText = "Tip Percentage: 20%";
-    tipAmountReminder.innerText = "You are tipping 20%";
-    tenButton.disabled = false;
-    fifteenButton.disabled = false;
-    twentyButton.disabled = true;
+    tipThings("20%");
     finalAmounts();
 });
+
+function tipThings(tipAmount: string) {
+    outTipPercent.innerText = `Tip Percentage: ${tipAmount}`;
+    tipAmountReminder.innerText = `You are tipping ${tipAmount}`;
+
+    tenButton.disabled = false;
+    fifteenButton.disabled = false;
+    twentyButton.disabled = false;
+
+    if (tipAmount === "20%") {
+        twentyButton.disabled = true;
+    }
+    else if (tipAmount === "15%") {
+        fifteenButton.disabled = true;
+    }
+    else if (tipAmount === "10%") {
+        tenButton.disabled = true;
+    }
+}
 
 function finalAmounts() {
     if (billAmount.value != null && !isNaN(Number(billAmount.value)) &&
@@ -68,8 +78,6 @@ function finalAmounts() {
         let amount = Number(billAmount.value);
 
         outAmountOfTip.innerText = `Amount of tip: $${(amount * tip).toFixed(2)}`;
-
-
         outTotalToBePaid.innerText = `Total to be Paid: $${((1 + tip) * amount).toFixed(2)}`;
     }
 }

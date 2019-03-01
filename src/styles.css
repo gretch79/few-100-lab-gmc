@@ -1,3 +1,7 @@
+body {
+    margin: 3%;
+}
 h1 {
-    color:red;
+    color:black;
+    size: 12pt;
 }

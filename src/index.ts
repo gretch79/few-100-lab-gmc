@@ -12,9 +12,8 @@ const outTotalToBePaid = document.getElementById('outTotalToBePaid');
 const outAmountOfTip = document.getElementById('outAmountOfTip');
 
 billAmount.addEventListener('change', () => {
-    console.log(billAmount.value);
-    if (billAmount.value != null) {
-        outBillAmount.innerText = `Bill Amount: $${billAmount.value}`;
+    if (billAmount.value != null && Number(billAmount.value) != NaN) {
+        outBillAmount.innerText = `Bill Amount: $${Number(billAmount.value).toFixed(2)}`;
         finalAmounts();
     }
 
@@ -47,13 +46,18 @@ twentyButton.addEventListener('click', () => {
 });
 
 function finalAmounts() {
-    if (billAmount.value != null &&
+    if (billAmount.value != null && Number(billAmount.value) != NaN &&
         (tenButton.disabled === false || fifteenButton.disabled === false || twentyButton.disabled === false)) {
         let tip = 0;
-        if (tenButton.disabled) { tip = 10; }
-        else if (fifteenButton.disabled) { tip = 15; }
-        else if (twentyButton.disabled) { tip = 20; }
+        if (tenButton.disabled) { tip = .10; }
+        else if (fifteenButton.disabled) { tip = .15; }
+        else if (twentyButton.disabled) { tip = .20; }
 
-        outAmountOfTip.innerText = `Amount of tip: $${tip}`;
+        let amount = Number(billAmount.value);
+
+        outAmountOfTip.innerText = `Amount of tip: $${(amount * tip).toFixed(2)}`;
+
+
+        outTotalToBePaid.innerText = `Total to be Paid: $${((1 + tip) * amount).toFixed(2)}`;
     }
 }

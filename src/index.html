@@ -19,21 +19,21 @@
         </div>
         <input type="text"
                class="form-control"
-               aria-label="Dollar amount (with dot and two decimal places)">
+               aria-label="Dollar amount (with dot and two decimal places)" id="billAmount">
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend" id="button-addon3">
-          <button class="btn btn-outline-secondary" type="button">10%</button>
-          <button class="btn btn-outline-secondary" type="button">15%</button>
-          <button class="btn btn-outline-secondary" type="button">20%</button>
+          <button class="btn btn-outline-secondary" type="button" id="tenPercent">10%</button>
+          <button class="btn btn-outline-secondary" type="button" id="fifteenPercent">15%</button>
+          <button class="btn btn-outline-secondary" type="button" id="twentyPercent">20%</button>
         </div>
       </div>
       
       <ul class="list-group">
-        <li class="list-group-item">Bill Amount: $</li>
-        <li class="list-group-item">Tip Percentage: </li>
-        <li class="list-group-item">Amount of tip: $</li>
-        <li class="list-group-item">Total to be Paid: $</li>
+        <li class="list-group-item" id="outBillAmount">Bill Amount: $</li>
+        <li class="list-group-item" id="outTipPercent">Tip Percentage: </li>
+        <li class="list-group-item" id="outAmountOfTip">Amount of tip: $</li>
+        <li class="list-group-item" id="outTotalToBePaid">Total to be Paid: $</li>
       </ul>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

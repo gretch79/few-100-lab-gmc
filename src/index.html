@@ -20,6 +20,7 @@
         <input type="text"
                class="form-control"
                aria-label="Dollar amount (with dot and two decimal places)" id="billAmount">
+        <label id="errorMessage" class="error"></label>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend" id="button-addon3">
@@ -27,7 +28,9 @@
           <button class="btn btn-outline-secondary" type="button" id="fifteenPercent">15%</button>
           <button class="btn btn-outline-secondary" type="button" id="twentyPercent">20%</button>
         </div>
+        
       </div>
+      <div><label id="tipAmountReminder"></label></div>
       
       <ul class="list-group">
         <li class="list-group-item" id="outBillAmount">Bill Amount: $</li>

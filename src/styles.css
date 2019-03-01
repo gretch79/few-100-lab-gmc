@@ -5,3 +5,10 @@ h1 {
     color:black;
     size: 12pt;
 }
+
+.error{
+    border-color: red;
+    border-width: 2px;
+    font-weight: bold;
+    color: red;
+}

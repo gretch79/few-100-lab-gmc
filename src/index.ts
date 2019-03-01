@@ -1,7 +1,4 @@
 import './styles.css';
-console.log('Ready to Party');
-
-
 const tenButton = document.getElementById('tenPercent') as HTMLInputElement;
 const fifteenButton = document.getElementById('fifteenPercent') as HTMLInputElement;
 const twentyButton = document.getElementById('twentyPercent') as HTMLInputElement;
@@ -10,9 +7,21 @@ const outBillAmount = document.getElementById('outBillAmount');
 const outTipPercent = document.getElementById('outTipPercent');
 const outTotalToBePaid = document.getElementById('outTotalToBePaid');
 const outAmountOfTip = document.getElementById('outAmountOfTip');
+const errorMessage = document.getElementById('errorMessage');
+const tipAmountReminder = document.getElementById('tipAmountReminder');
 
-billAmount.addEventListener('change', () => {
-    if (billAmount.value != null && Number(billAmount.value) != NaN) {
+billAmount.addEventListener('keyup', () => {
+    if (isNaN(Number(billAmount.value)) || Number(billAmount.value) < 0) {
+        billAmount.className = "error";
+        billAmount.value = "";
+        errorMessage.innerText = "Bill amount entered is not a valid amount!";
+        return;
+    }
+    else {
+        billAmount.className = "";
+        errorMessage.innerText = "";
+    }
+    if (billAmount.value != null) {
         outBillAmount.innerText = `Bill Amount: $${Number(billAmount.value).toFixed(2)}`;
         finalAmounts();
     }
@@ -21,6 +30,7 @@ billAmount.addEventListener('change', () => {
 
 tenButton.addEventListener('click', () => {
     outTipPercent.innerText = "Tip Percentage: 10%";
+    tipAmountReminder.innerText = "You are tipping 10%";
     tenButton.disabled = true;
     fifteenButton.disabled = false;
     twentyButton.disabled = false;
@@ -30,6 +40,7 @@ tenButton.addEventListener('click', () => {
 
 fifteenButton.addEventListener('click', () => {
     outTipPercent.innerText = "Tip Percentage: 15%";
+    tipAmountReminder.innerText = "You are tipping 15%";
     tenButton.disabled = false;
     fifteenButton.disabled = true;
     twentyButton.disabled = false;
@@ -39,6 +50,7 @@ fifteenButton.addEventListener('click', () => {
 
 twentyButton.addEventListener('click', () => {
     outTipPercent.innerText = "Tip Percentage: 20%";
+    tipAmountReminder.innerText = "You are tipping 20%";
     tenButton.disabled = false;
     fifteenButton.disabled = false;
     twentyButton.disabled = true;
@@ -46,7 +58,7 @@ twentyButton.addEventListener('click', () => {
 });
 
 function finalAmounts() {
-    if (billAmount.value != null && Number(billAmount.value) != NaN &&
+    if (billAmount.value != null && !isNaN(Number(billAmount.value)) &&
         (tenButton.disabled === false || fifteenButton.disabled === false || twentyButton.disabled === false)) {
         let tip = 0;
         if (tenButton.disabled) { tip = .10; }
